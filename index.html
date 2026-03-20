@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Messina — Consulenza del Lavoro</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0c1d3a;
+  --navy2:#163660;
+  --blue:#1e6db5;
+  --gold:#b89650;
+  --gold-dim:rgba(184,150,80,0.25);
+  --cream:#f4f1ea;
+  --offwhite:#faf9f7;
+  --white:#ffffff;
+  --text:#1a1a18;
+  --muted:#6b6b6a;
+  --rule:rgba(0,0,0,0.09);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);overflow-x:hidden;background:var(--white)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.on{opacity:1;transform:none}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:var(--navy)}
+.sm-nav-in{display:flex;align-items:center;justify-content:space-between;height:58px;padding:0 6%}
+.sm-logo{font-family:Georgia,serif;font-size:17px;color:#fff;letter-spacing:0.03em;text-decoration:none}
+.sm-logo em{color:var(--gold);font-style:normal}
+.sm-links{display:flex;gap:28px}
+.sm-links a{font-size:10px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;transition:color 0.2s}
+.sm-links a:hover{color:var(--gold)}
+.sm-gold-rule{height:1px;background:linear-gradient(to right,rgba(184,150,80,0.7),rgba(184,150,80,0.15),transparent);position:fixed;top:58px;left:0;width:100%;z-index:100}
+
+/* HERO */
+.sm-hero{background:var(--navy);padding:128px 6% 88px;position:relative;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.sm-hero::after{content:'M';position:absolute;right:3%;top:50%;transform:translateY(-50%);font-family:Georgia,serif;font-size:340px;color:rgba(255,255,255,0.025);font-style:italic;line-height:1;pointer-events:none;user-select:none}
+.sm-eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:36px}
+.sm-eyebrow-line{width:28px;height:1px;background:var(--gold)}
+.sm-eyebrow-text{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.sm-hero h1{font-family:Georgia,serif;font-size:clamp(38px,5.5vw,72px);font-weight:normal;color:#fff;line-height:1.1;max-width:700px;margin-bottom:24px}
+.sm-hero h1 em{color:var(--gold);font-style:italic}
+.sm-hero-sub{font-size:14px;color:rgba(255,255,255,0.45);max-width:440px;line-height:1.8;margin-bottom:60px}
+.sm-hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px;position:relative;z-index:1;width:100%}
+.sm-hcard{border:1px solid var(--gold-dim);padding:30px 26px;cursor:pointer;transition:border-color 0.3s,background 0.3s;position:relative}
+.sm-hcard:hover{border-color:rgba(184,150,80,0.55);background:rgba(255,255,255,0.03)}
+.sm-hcard-bar{width:20px;height:1px;background:var(--gold);margin-bottom:18px;transition:width 0.35s}
+.sm-hcard:hover .sm-hcard-bar{width:36px}
+.sm-hcard h3{font-family:Georgia,serif;font-size:19px;font-weight:normal;color:#fff;margin-bottom:8px}
+.sm-hcard p{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.7}
+.sm-hcard-arr{position:absolute;top:28px;right:24px;color:var(--gold);font-size:15px;opacity:0;transition:opacity 0.25s}
+.sm-hcard:hover .sm-hcard-arr{opacity:1}
+
+/* SECTIONS */
+.sm-sec{padding:96px 6%}
+.sm-sec-tag{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+.sm-sec-tag-line{width:20px;height:1px;background:var(--gold)}
+.sm-sec-tag-text{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);font-weight:500}
+.sm-h2{font-family:Georgia,serif;font-size:clamp(26px,3.2vw,42px);font-weight:normal;line-height:1.12;color:var(--navy);max-width:520px;margin-bottom:14px}
+.sm-h2 em{color:var(--gold);font-style:italic}
+.sm-desc{font-size:13.5px;color:var(--muted);max-width:460px;line-height:1.85;margin-bottom:56px}
+
+/* AZIENDE */
+.sm-az{background:var(--offwhite)}
+.sm-svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.sm-svc{background:var(--offwhite);padding:36px 30px;transition:background 0.2s;position:relative}
+.sm-svc:hover{background:#fff}
+.sm-svc-num{font-size:10px;color:var(--gold);letter-spacing:0.1em;margin-bottom:22px;font-family:Georgia,serif}
+.sm-svc-hr{width:28px;height:1px;background:var(--rule);margin-bottom:22px;transition:background 0.3s,width 0.3s}
+.sm-svc:hover .sm-svc-hr{background:var(--gold);width:40px}
+.sm-svc h4{font-family:Georgia,serif;font-size:17px;font-weight:normal;color:var(--navy);margin-bottom:10px;line-height:1.35}
+.sm-svc p{font-size:12.5px;color:var(--muted);line-height:1.75}
+
+/* STRIP */
+.sm-strip{background:var(--navy);padding:80px 6%;display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap;border-top:1px solid rgba(184,150,80,0.4)}
+.sm-strip-left{max-width:460px}
+.sm-strip-rule{width:28px;height:1px;background:var(--gold);margin-bottom:18px}
+.sm-strip h2{font-family:Georgia,serif;font-size:clamp(22px,2.8vw,36px);font-weight:normal;color:#fff;line-height:1.22;margin-bottom:12px}
+.sm-strip h2 em{color:var(--gold);font-style:italic}
+.sm-strip-p{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.8}
+.sm-metrics{display:flex;gap:48px;flex-wrap:wrap}
+.sm-metric-v{font-family:Georgia,serif;font-size:52px;font-weight:normal;color:#fff;line-height:1}
+.sm-metric-v sup{font-size:20px;color:var(--gold);vertical-align:top;margin-top:10px;display:inline-block}
+.sm-metric-l{font-size:10px;color:rgba(255,255,255,0.3);margin-top:10px;text-transform:uppercase;letter-spacing:0.1em}
+
+/* PERSONE */
+.sm-pers{background:var(--cream)}
+.sm-pers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:rgba(0,0,0,0.07);border:1px solid rgba(0,0,0,0.07)}
+.sm-pc{background:var(--cream);padding:30px 26px;transition:background 0.2s}
+.sm-pc:hover{background:var(--offwhite)}
+.sm-pill{display:inline-block;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(30,109,181,0.22);padding:4px 9px;margin-bottom:18px}
+.sm-pc h4{font-family:Georgia,serif;font-size:16px;font-weight:normal;color:var(--navy);margin-bottom:9px;line-height:1.4}
+.sm-pc p{font-size:12.5px;color:var(--muted);line-height:1.72}
+
+/* CONTACT */
+.sm-contact{background:#fff;display:grid;grid-template-columns:1fr 1.3fr;gap:72px;align-items:start}
+.sm-ci{display:flex;flex-direction:column;gap:22px;margin-top:12px}
+.sm-ci-row{display:flex;align-items:flex-start;gap:14px}
+.sm-ci-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;margin-top:6px;flex-shrink:0}
+.sm-ci-lbl{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.sm-ci-val{font-size:13.5px;color:var(--text)}
+.sm-fg{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sm-frow{display:flex;flex-direction:column;gap:7px}
+.sm-frow.full{grid-column:1/-1}
+.sm-frow label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.sm-frow input,.sm-frow select,.sm-frow textarea{font-family:'DM Sans',system-ui,sans-serif;font-size:13.5px;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:9px 0;outline:none;color:var(--text);background:transparent;width:100%;transition:border-color 0.25s}
+.sm-frow input:focus,.sm-frow select:focus,.sm-frow textarea:focus{border-color:var(--gold)}
+.sm-frow select{appearance:none;cursor:pointer}
+.sm-frow textarea{min-height:96px;resize:vertical}
+.sm-submit{grid-column:1/-1;background:var(--navy);color:#fff;border:none;padding:14px 28px;font-family:Georgia,serif;font-size:14px;cursor:pointer;transition:background 0.2s;display:flex;align-items:center;justify-content:space-between;letter-spacing:0.02em;width:100%}
+.sm-submit:hover{background:var(--navy2)}
+.sm-submit-arr{color:var(--gold)}
+
+/* FOOTER */
+footer{background:var(--navy);padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(184,150,80,0.25)}
+.sm-footer-logo{font-family:Georgia,serif;font-size:15px;color:#fff}
+.sm-footer-logo em{color:var(--gold);font-style:normal}
+.sm-footer-copy{font-size:10.5px;color:rgba(255,255,255,0.28);letter-spacing:0.04em}
+
+@media(max-width:660px){
+  .sm-hero-cards{grid-template-columns:1fr}
+  .sm-contact{grid-template-columns:1fr}
+  .sm-fg{grid-template-columns:1fr}
+  .sm-strip{flex-direction:column}
+  .sm-links{gap:16px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="sm-nav-in">
+    <a class="sm-logo" href="#">Studio<em>Messina</em></a>
+    <div class="sm-links">
+      <a href="#aziende">Aziende</a>
+      <a href="#persone">Privati</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+  </div>
+</nav>
+<div class="sm-gold-rule"></div>
+
+<!-- HERO -->
+<div class="sm-hero" id="top">
+  <div class="sm-eyebrow reveal">
+    <div class="sm-eyebrow-line"></div>
+    <div class="sm-eyebrow-text">Studio di Consulenza del Lavoro</div>
+  </div>
+  <h1 class="reveal d1">Consulenza del lavoro<br><em>su misura.</em></h1>
+  <p class="sm-hero-sub reveal d2">Soluzioni integrate per aziende e professionisti. Seleziona il percorso più adatto alle tue esigenze.</p>
+  <div class="sm-hero-cards reveal d3">
+    <div class="sm-hcard" onclick="document.getElementById('aziende').scrollIntoView({behavior:'smooth'})">
+      <div class="sm-hcard-bar"></div>
+      <h3>Sono un'Azienda</h3>
+      <p>Consulenza strategica, gestione del personale e compliance normativa per imprese.</p>
+      <div class="sm-hcard-arr">→</div>
+    </div>
+    <div class="sm-hcard" onclick="document.getElementById('persone').scrollIntoView({behavior:'smooth'})">
+      <div class="sm-hcard-bar"></div>
+      <h3>Sono un Privato</h3>
+      <p>Assistenza individuale per lavoratori dipendenti, buste paga e controversie.</p>
+      <div class="sm-hcard-arr">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVIZI AZIENDE -->
+<section class="sm-sec sm-az" id="aziende">
+  <div class="sm-sec-tag reveal">
+    <div class="sm-sec-tag-line"></div>
+    <div class="sm-sec-tag-text">Consulenza Aziendale</div>
+  </div>
+  <h2 class="sm-h2 reveal d1">Soluzioni High Level<br>per le Imprese.</h2>
+  <p class="sm-desc reveal d2">Un partner strategico per navigare la complessità del diritto del lavoro, ottimizzare i costi e valorizzare il capitale umano.</p>
+  <div class="sm-svc-grid reveal d3">
+    <div class="sm-svc">
+      <p class="sm-svc-num">01 — Payroll</p>
+      <div class="sm-svc-hr"></div>
+      <h4>Gestione Paghe &amp; Contributi</h4>
+      <p>Elaborazione cedolini, F24, Uniemens e reportistica contributiva con aggiornamento normativo continuo.</p>
+    </div>
+    <div class="sm-svc">
+      <p class="sm-svc-num">02 — Contratti</p>
+      <div class="sm-svc-hr"></div>
+      <h4>Consulenza Contrattuale</h4>
+      <p>Redazione e analisi di contratti collettivi e individuali, regolamenti aziendali e policy HR.</p>
+    </div>
+    <div class="sm-svc">
+      <p class="sm-svc-num">03 — Welfare</p>
+      <div class="sm-svc-hr"></div>
+      <h4>Welfare Aziendale</h4>
+      <p>Progettazione di piani di welfare su misura: fringe benefit, flexible benefit e politiche retributive.</p>
+    </div>
+    <div class="sm-svc">
+      <p class="sm-svc-num">04 — Legal</p>
+      <div class="sm-svc-hr"></div>
+      <h4>Gestione Controversie</h4>
+      <p>Assistenza in sede ispettiva, contenzioso amministrativo e giudiziale, gestione di procedure disciplinari.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="sm-strip">
+  <div class="sm-strip-left reveal">
+    <div class="sm-strip-rule"></div>
+    <h2>Non solo adempimenti.<br><em>Strategia d'impresa.</em></h2>
+    <p class="sm-strip-p">Affianchiamo le aziende nelle decisioni strategiche che riguardano il capitale umano, con un approccio proattivo e orientato ai risultati.</p>
+  </div>
+  <div class="sm-metrics reveal d2">
+    <div>
+      <div class="sm-metric-v">100<sup>%</sup></div>
+      <div class="sm-metric-l">Aggiornamento normativo</div>
+    </div>
+    <div>
+      <div class="sm-metric-v">24<sup>h</sup></div>
+      <div class="sm-metric-l">Tempo di risposta</div>
+    </div>
+    <div>
+      <div class="sm-metric-v">360<sup>°</sup></div>
+      <div class="sm-metric-l">Consulenza integrata</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVIZI PERSONE -->
+<section class="sm-sec sm-pers" id="persone">
+  <div class="sm-sec-tag reveal">
+    <div class="sm-sec-tag-line"></div>
+    <div class="sm-sec-tag-text">Consulenza per Privati</div>
+  </div>
+  <h2 class="sm-h2 reveal d1">Tutela il tuo lavoro.</h2>
+  <p class="sm-desc reveal d2">Assistenza personalizzata per lavoratori dipendenti e persone fisiche nelle questioni lavorative e previdenziali.</p>
+  <div class="sm-pers-grid reveal d3">
+    <div class="sm-pc">
+      <div class="sm-pill">Contenzioso</div>
+      <h4>CTP — Consulenza Tecnica di Parte</h4>
+      <p>Supporto tecnico qualificato nelle controversie di lavoro, perizie e assistenza nelle udienze.</p>
+    </div>
+    <div class="sm-pc">
+      <div class="sm-pill">Previdenza</div>
+      <h4>Calcolo Contributivo</h4>
+      <p>Verifica della posizione previdenziale, ricostruzione di carriera e simulazione della pensione.</p>
+    </div>
+    <div class="sm-pc">
+      <div class="sm-pill">Busta Paga</div>
+      <h4>Verifica Buste Paga</h4>
+      <p>Analisi e controllo della correttezza delle retribuzioni, scatti di anzianità e voci accessorie.</p>
+    </div>
+    <div class="sm-pc">
+      <div class="sm-pill">Accordo</div>
+      <h4>Conciliazioni</h4>
+      <p>Assistenza nelle sedi di conciliazione sindacale e presso la Direzione Territoriale del Lavoro.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section class="sm-sec sm-contact" id="contatti">
+  <div class="reveal">
+    <div class="sm-sec-tag">
+      <div class="sm-sec-tag-line"></div>
+      <div class="sm-sec-tag-text">Contatti</div>
+    </div>
+    <h2 class="sm-h2">Parliamo del tuo progetto.</h2>
+    <p style="font-size:13px;color:var(--muted);line-height:1.85;margin-bottom:28px">Compila il form per ricevere una prima consulenza.<br>Ti risponderemo entro 24 ore lavorative.</p>
+    <div class="sm-ci">
+      <div class="sm-ci-row">
+        <div class="sm-ci-dot"></div>
+        <div>
+          <div class="sm-ci-lbl">Sede</div>
+          <div class="sm-ci-val">Indirizzo Studio — Città</div>
+        </div>
+      </div>
+      <div class="sm-ci-row">
+        <div class="sm-ci-dot"></div>
+        <div>
+          <div class="sm-ci-lbl">Telefono</div>
+          <div class="sm-ci-val">+39 000 0000000</div>
+        </div>
+      </div>
+      <div class="sm-ci-row">
+        <div class="sm-ci-dot"></div>
+        <div>
+          <div class="sm-ci-lbl">Email</div>
+          <div class="sm-ci-val">info@studiomessina.it</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal d2">
+    <div class="sm-fg">
+      <div class="sm-frow">
+        <label>Nome</label>
+        <input type="text" placeholder="Mario">
+      </div>
+      <div class="sm-frow">
+        <label>Cognome</label>
+        <input type="text" placeholder="Rossi">
+      </div>
+      <div class="sm-frow full">
+        <label>Email</label>
+        <input type="email" placeholder="mario.rossi@email.it">
+      </div>
+      <div class="sm-frow full">
+        <label>Sei un'azienda o un privato?</label>
+        <select>
+          <option value="">Seleziona...</option>
+          <option>Azienda</option>
+          <option>Privato / Lavoratore dipendente</option>
+        </select>
+      </div>
+      <div class="sm-frow full">
+        <label>Messaggio</label>
+        <textarea placeholder="Descrivi brevemente la tua esigenza..."></textarea>
+      </div>
+      <button class="sm-submit">Invia richiesta <span class="sm-submit-arr">→</span></button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="sm-footer-logo">Studio<em>Messina</em></div>
+  <p class="sm-footer-copy">© 2025 Studio Messina — Consulenza del Lavoro. Tutti i diritti riservati.</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('on');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

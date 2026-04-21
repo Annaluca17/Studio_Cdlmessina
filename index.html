@@ -231,8 +231,8 @@ footer{background:var(--navy);padding:40px 5%;border-top:1px solid rgba(184,150,
     <div class="nav-links">
       <a onclick="showView('aziende')" id="nav-az">Aziende</a>
       <a onclick="showView('privati')" id="nav-pr">Privati</a>
-      <a onclick="scrollTo('chi-sono')">Chi Siamo</a>
-      <a onclick="scrollTo('contatti')" class="nav-cta">Contatti</a>
+      <a onclick="scrollToSection('chi-sono')">Chi Siamo</a>
+      <a onclick="scrollToSection('contatti')" class="nav-cta">Contatti</a>
     </div>
     <div class="ham" id="ham" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -244,8 +244,8 @@ footer{background:var(--navy);padding:40px 5%;border-top:1px solid rgba(184,150,
 <div class="mobile-menu" id="mobile-menu">
   <a onclick="showView('aziende');toggleMenu()">Aziende</a>
   <a onclick="showView('privati');toggleMenu()">Privati</a>
-  <a onclick="scrollTo('chi-sono');toggleMenu()">Chi Siamo</a>
-  <a onclick="scrollTo('contatti');toggleMenu()" class="m-cta">Contatti</a>
+  <a onclick="scrollToSection('chi-sono');toggleMenu()">Chi Siamo</a>
+  <a onclick="scrollToSection('contatti');toggleMenu()" class="m-cta">Contatti</a>
 </div>
 
 <!-- HERO -->
@@ -255,8 +255,8 @@ footer{background:var(--navy);padding:40px 5%;border-top:1px solid rgba(184,150,
     <div class="eyebrow-line"></div>
     <div class="eyebrow-text">Studio di Consulenza del Lavoro · Paternò</div>
   </div>
-  <h1 class="reveal d1">Relazioni industriali<br>e gestione HR.<br><em>Su misura.</em></h1>
-  <p class="hero-sub reveal d2">Consulenza specializzata per imprese e lavoratori. Expertise maturata in contesti multinazionali al servizio del territorio.</p>
+  <h1 class="reveal d1">Consulenza del lavoro<br>nuova. Aggiornata.<br><em>Su misura.</em></h1>
+  <p class="hero-sub reveal d2">Competenza maturata nelle grandi imprese, al servizio di aziende e lavoratori. Perché ogni situazione merita un approccio costruito su di essa.</p>
   <div class="hero-cards reveal d3">
     <div class="hcard" onclick="showView('aziende')">
       <div class="hcard-bar"></div>
@@ -532,7 +532,8 @@ footer{background:var(--navy);padding:40px 5%;border-top:1px solid rgba(184,150,
   </div>
 
   <div class="reveal d2">
-      <form class="fg" id="contact-form" action="https://formspree.io/f/meevlvwk" method="POST">
+    <!-- ⚠️ Sostituire YOUR_FORM_ID con il codice ottenuto su formspree.io -->
+    <form class="fg" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <div class="frow">
         <label>Nome *</label>
         <input type="text" name="nome" placeholder="Mario" required>
@@ -612,7 +613,7 @@ footer{background:var(--navy);padding:40px 5%;border-top:1px solid rgba(184,150,
         <div class="footer-col-title">Servizi</div>
         <a onclick="showView('aziende')">Servizi Aziende</a>
         <a onclick="showView('privati')">Servizi Privati</a>
-        <a onclick="scrollTo('chi-sono')">Chi Siamo</a>
+        <a onclick="scrollToSection('chi-sono')">Chi Siamo</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Contatti</div>
@@ -670,9 +671,12 @@ function showView(view) {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-function scrollTo(id) {
+function scrollToSection(id) {
   const el = document.getElementById(id);
-  if (el) { el.scrollIntoView({behavior: 'smooth'}); }
+  if (!el) return;
+  const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 62;
+  const top = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+  window.scrollTo({top, behavior: 'smooth'});
 }
 
 /* ── HAMBURGER ── */
